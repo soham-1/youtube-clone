@@ -1,0 +1,4 @@
+node_modules
+.env
+important_notes.txt
+models
