@@ -1,0 +1,9 @@
+.form-control {
+    color: white;
+    background-color: transparent;
+}
+
+.form-control:focus {
+    color: white;
+    background-color: transparent;
+}

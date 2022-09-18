@@ -1,0 +1,14 @@
+.menu {
+    background-color: #202020;
+    height: 100vh;
+    font-weight: bold;
+    font-family: Roboto, Arial, sans-serif;
+    color: white;
+}
+
+.menu-link {
+    height: 40px;
+}
+.menu-link:hover {
+    background-color: rgb(46, 44, 44)
+}
