@@ -1,7 +1,9 @@
-import './Explore.css';
-import thumbnail from '../../assets/images/default-video-thumbnail.jpg';
+import { format } from 'timeago.js';
 
-function ExploreCard() {
+import thumbnail from '../../assets/images/default-video-thumbnail.jpg';
+import './Explore.css';
+
+function ExploreCard({ key, video }) {
     return (
         <div className="explorecard d-flex col-lg-9 p-1 mx-5 mb-3">
             <div className='me-2'>
@@ -9,13 +11,13 @@ function ExploreCard() {
             </div>
             <div className='d-flex flex-column text-white'>
                 <div className='fw-bold fs-5'>
-                    Video title
+                    {video.title}
                 </div>
                 <div className='mb-2'>
-                    details
+                    {video.desc}
                 </div>
                 <div>
-                    description
+                    <small>{video.views} views . {format(video.createdAt)}</small>
                 </div>
             </div>
         </div>

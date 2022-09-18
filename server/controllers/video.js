@@ -75,7 +75,7 @@ export const random = async (req, res, next) => {
 // find most viewed videos
 export const trend = async (req, res, next) => {
     try {
-        const videos = await Video.find().sort({ views: -1 });
+        const videos = await Video.find().sort({ views: -1, createdAt: -1 });
         res.status(200).json(videos);
     } catch (err) {
         next(err);
