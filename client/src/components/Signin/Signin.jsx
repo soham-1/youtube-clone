@@ -26,7 +26,7 @@ function Signin() {
             dispatch(loginSuccess(userInfo));
             navigate('/');
         } catch (err) {
-            console.log(err);
+            console.log(err.response);
             dispatch(loginError());
         }
     };
