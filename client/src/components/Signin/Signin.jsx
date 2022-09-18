@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router';
-import { loginError, loginStart, loginSuccess, logout } from '../../redux/userSlice';
+import { loginError, loginStart, loginSuccess } from '../../redux/userSlice';
 
 import axiosInstance from '../../utils/axiosInstance';
 import './Signin.css';
@@ -10,7 +10,6 @@ function Signin() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useDispatch();
-    const u = useSelector(state => state.user.userInfo.username);
     const navigate = useNavigate();
 
     const handleLogin = async (e) => {
