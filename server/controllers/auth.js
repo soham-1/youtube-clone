@@ -68,3 +68,12 @@ export const googleAuth = async (req, res, next) => {
         console.log(err);
     }
 };
+
+export const logout = async (req, res, next) => {
+    res.cookie('access_token', 'none', {
+        expires: new Date(Date.now()),
+        httpOnly: true
+    })
+
+    res.status(200).json({"success": "user logged out successfully"});
+}

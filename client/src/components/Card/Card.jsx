@@ -4,7 +4,7 @@ import { format } from 'timeago.js';
 import './Card.css';
 import thumbnail from '../../assets/images/default-video-thumbnail.jpg';
 
-export default function Card({ key, video }) {
+export default function Card({ video }) {
 
     return (
         <div className="d-flex card me-3 my-2 bg-transparent">

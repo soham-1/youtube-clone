@@ -1,6 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-let initialState = {
+import { loadState, saveState } from '../utils/localStorage/userLocalStorage';
+
+const nullState = {
     userInfo: {
         userid: "",
         username: "",
@@ -9,6 +11,7 @@ let initialState = {
     loading: false,
     error: false,
 }
+const initialState = loadState();
 
 export const userSlice = createSlice({
     name: 'user',
@@ -23,13 +26,14 @@ export const userSlice = createSlice({
             state.userInfo.userid = action.payload.userid;
             state.userInfo.username = action.payload.username;
             state.userInfo.email = action.payload.email;
+            saveState(state);
         },
         loginError: (state) => {
             state.loading = false;
             state.error = true;
         },
         logout: (state) => {
-            state.user = initialState; // as a slice reducer responds to all dispatch even from different reducers so state also contains
+            state.user = nullState; // as a slice reducer responds to all dispatch even from different reducers so state also contains
             // all variables, to specifically reset a particular state use state.name of reducer
         }
     },

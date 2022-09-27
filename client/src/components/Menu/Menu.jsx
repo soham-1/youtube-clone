@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import './Menu.css';
 
 function Menu() {
+  const username = useSelector(state => state.user.userInfo.username);
+
   return (
     <div className='menu col-lg-2 d-flex-column p-2'>
       <div className="menu-link p-3" >
@@ -31,6 +34,16 @@ function Menu() {
           <div className="d-flex fs-5 text-white align-items-center p-2">Sign In</div>
         </Link>
       </div>
+      {
+        username === "" ?
+          <></> :
+          <div className="menu-link p-3" >
+            <Link to="/logout" className="d-flex align-items-center h-100" style={{ textDecoration: 'none' }} >
+              <div className="d-flex align-items-center"></div>
+              <div className="d-flex fs-5 text-white align-items-center p-2">Logout</div>
+            </Link>
+          </div>
+      }
     </div>
   )
 }

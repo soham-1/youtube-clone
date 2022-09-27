@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { loginError, loginStart, loginSuccess } from '../../redux/userSlice';
 import { auth, provider } from '../../utils/firebase';
