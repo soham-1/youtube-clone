@@ -100,7 +100,9 @@ const UploadVideo = ({ setOpen }) => {
         <div className="uploadVideo">
             <div className="d-flex flex-column uploadForm p-3 col-lg-6 justify-content-center">
                 <div className="ms-auto fw-bold fs-5" >
-                    <a onClick={close} style={{ cursor: "pointer" }}>close</a>
+                    <a onClick={close} style={{ cursor: "pointer" }}>
+                        <i className="bi bi-x-lg"></i>
+                    </a>
                 </div>
                 <form className="d-flex flex-column" onSubmit={handleSubmit}>
                     <div className="form-group mb-3">

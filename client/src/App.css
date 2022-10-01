@@ -1,5 +1,5 @@
 .main {
     height: 100vh;
-    overflow-y: scroll;
+    overflow-y: auto;
     background-color: rgb(13, 13, 13);
 }

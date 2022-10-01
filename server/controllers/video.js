@@ -122,3 +122,20 @@ export const sub = async (req, res, next) => {
         next(err);
     }
 };
+
+export const addView = async (req, res, next) => {
+    try {
+        if (req.body.id === undefined)
+            return res.status(403).send("id is required")
+        const updatedVideo = await Video.findByIdAndUpdate(
+            req.body.id,
+            {
+                $inc: { 'views': 1 }
+            },
+            { 'new': true }
+        );
+        res.status(200).json(updatedVideo);
+    } catch (err) {
+        next(err);
+    }
+};

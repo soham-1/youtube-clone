@@ -36,7 +36,7 @@ function Navbar() {
                                 ) :
                                 (
                                     <div className="d-flex align-items-center fs-5 text-white p-1">
-                                        <button id="sign-in-text" onClick={() => {setOpen(true)}}>Upload Video</button>
+                                        <i className="me-3 bi bi-plus-circle" onClick={() => {setOpen(true)}} title="upload video"></i>
                                         <span id="sign-in-text">Welcome, {username}</span>
                                     </div>
                                 )

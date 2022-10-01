@@ -1,0 +1,7 @@
+.bi-hand-thumbs-up:hover, .bi-hand-thumbs-down:hover {
+    cursor: pointer;
+}
+
+.bi-hand-thumbs-up-fill:hover, .bi-hand-thumbs-down-fill:hover {
+    cursor: pointer;
+}
