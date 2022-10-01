@@ -18,7 +18,7 @@ function Home() {
     }, []);
 
     return (
-        <div className=' d-flex flex-wrap w-100'>
+        <div className='d-flex flex-wrap w-100'>
             {
                 videos.map(video => (
                     <Card key={video._id} video={video} />
