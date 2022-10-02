@@ -23,6 +23,7 @@ const Video = () => {
             .put(`users/like/${id}`)
             .then((res) => {
                 console.log("video liked");
+                setReload(!reload);
             })
             .catch(err => {
                 console.log(err.response);
@@ -34,6 +35,7 @@ const Video = () => {
             .put(`users/dislike/${id}`)
             .then((res) => {
                 console.log("video disliked");
+                setReload(!reload);
             })
             .catch(err => {
                 console.log(err.response);
@@ -90,7 +92,23 @@ const Video = () => {
             .get('users/get-subscribed')
             .then((res) => {
                 setSubscriberList(res.data);
+            });
+    }, []);
+
+    useEffect(() => {
+        axiosInstance
+            .get(`videos/${id}`)
+            .then((res) => {
+                console.log(res);
+                setVideo(res.data);
             })
+            .then(() => {
+                axiosInstance
+                    .get('users/get-subscribed')
+                    .then((res) => {
+                        setSubscriberList(res.data);
+                    });
+            });
     }, [reload]);
 
     if (video === undefined)
@@ -110,16 +128,22 @@ const Video = () => {
                 </video>
             </div>
             <div className="d-flex flex-column">
-                <div className='d-flex'>
+                <div className='d-flex '>
                     <span className="card-title fw-bold fs-3">{video.title}</span>
-                    <div className="ms-auto">
-                        <i className={`${LikeClass}`}
-                            onClick={like} onMouseEnter={() => setLikeClass('me-3 bi bi-hand-thumbs-up-fill')}
-                            onMouseOut={() => setLikeClass('me-3 bi bi-hand-thumbs-up')}
-                        ></i>
-                        <i className={`${dislikeClass}`} onClick={dislike} onMouseEnter={() => setDislikeClass('me-3 bi bi-hand-thumbs-down-fill')}
-                            onMouseOut={() => setDislikeClass('me-3 bi bi-hand-thumbs-down')}
-                        ></i>
+                    <div className="d-flex ms-auto">
+                        <div className="d-flex flex-column align-items-center">
+                            <i className={`${LikeClass}`}
+                                onClick={like} onMouseEnter={() => setLikeClass('me-3 bi bi-hand-thumbs-up-fill')}
+                                onMouseOut={() => setLikeClass('me-3 bi bi-hand-thumbs-up')}
+                            ></i>
+                            <span className="me-3">{video.likes.length}</span>
+                        </div>
+                        <div className="d-flex flex-column align-items-center">
+                            <i className={`${dislikeClass}`} onClick={dislike} onMouseEnter={() => setDislikeClass('me-3 bi bi-hand-thumbs-down-fill')}
+                                onMouseOut={() => setDislikeClass('me-3 bi bi-hand-thumbs-down')}
+                            ></i>
+                            <span className="me-3">{video.dislikes.length}</span>
+                        </div>
                     </div>
                 </div>
                 <div className="card-text mb-3">description: {video.desc}</div>
