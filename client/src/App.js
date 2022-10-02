@@ -10,6 +10,7 @@ import Navbar from './components/Navbar/Navbar';
 import Video from "./components/Video/Video";
 import Signin from "./components/Signin/Signin";
 import Logout from './components/Logout/Logout';
+import Subscription from "./components/Subscription/Subscription";
 
 function App() {
   return (
@@ -22,7 +23,7 @@ function App() {
             <Routes >
               <Route path="/" element={<Home />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/subscriptions" element={<Home />} />
+              <Route path="/subscriptions" element={<Subscription />} />
               <Route path="/video/:id" element={<Video />} />
               <Route path="/signin" element={<Signin />} />
               <Route path="/logout" element={<Logout />} />

@@ -10,7 +10,6 @@ import './Video.css';
 const Video = () => {
     const [video, setVideo] = useState(undefined);
     const [videoUser, setVideoUser] = useState("");
-    const [user, setUser] = useState("");
     const [LikeClass, setLikeClass] = useState("me-3 bi bi-hand-thumbs-up");
     const [dislikeClass, setDislikeClass] = useState("me-3 bi bi-hand-thumbs-down");
     const { id } = useParams();
