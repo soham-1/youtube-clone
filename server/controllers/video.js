@@ -139,3 +139,23 @@ export const addView = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getVideoFromUser = async (req, res, next) => {
+    try {
+        if (req.params.id === "")
+            return res.status(400).send("user id not given");
+        if (isNaN((req.params.max)))
+            return res.status(403).send("max limit must be a number");
+        const max =  req.params.max? 3 : req.params.max;
+        const videos = await Video
+            .find(
+                { 'userId': req.params.id }
+            )
+            .sort({ 'createdAt': -1 })
+            .limit(max);
+
+        return res.status(200).json(videos);
+    } catch (err) {
+        next(err);
+    }
+}

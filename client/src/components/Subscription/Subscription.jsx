@@ -7,10 +7,23 @@ function Subscription() {
     const [videos, setVideos] = useState([]);
 
     useEffect(() => {
+        let videoArr = [];
         axiosInstance
-            .get('/users/subscribed')
+            .get('/users/get-subscribed')
             .then(res => {
-                setVideos(res.data);
+                const arr = res.data;
+                console.log(arr);
+                arr.map((channel) => {
+                    axiosInstance
+                        .get(`/videos/get-from-user/${channel}/1`)
+                        .then(res => {
+                            videoArr = [].concat.apply(videoArr, res.data);
+                        })
+                        .then(() => {
+                            console.log(videoArr);
+                            setVideos(videoArr);
+                        })
+                })
             })
             .catch(err => {
                 console.log(err);

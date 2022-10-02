@@ -52,16 +52,19 @@ const Video = () => {
             .get(`videos/${id}`)
             .then((res) => {
                 console.log(res)
-                setVideo(res.data);
+                axiosInstance
+                    .put('videos/add-view', { 'id': id })
+                    .then(() => {
+                        res.data.views += 1;
+                        setVideo(res.data);
+                    })
+
                 axiosInstance
                     .get(`users/${res.data.userId}`)
                     .then((res) => {
                         setVideoUser(res.data);
                     });
             });
-
-        await axiosInstance
-            .put('videos/add-view', { 'id': id });
     }
 
     useEffect(() => {
@@ -100,7 +103,7 @@ const Video = () => {
                 <div className="card-text mb-3">description: {video.desc}</div>
                 <div className='d-flex align-items-center mb-3'>
                     <div className="card-text fw-bold fs-4 me-5">{videoUser.username}</div>
-                    <button type="button" class="btn btn-danger col-lg-2" onClick={subscribe}>subscribe</button>
+                    <button type="button" className="btn btn-danger col-lg-2" onClick={subscribe}>subscribe</button>
                 </div>
                 <small>{video.views} views . {format(video.createdAt)}</small>
             </div>

@@ -7,7 +7,7 @@ import axiosInstance from '../../utils/axiosInstance';
 import thumbnail from '../../assets/images/default-video-thumbnail.jpg';
 import './Explore.css';
 
-function ExploreCard({ key, video }) {
+function ExploreCard({ video }) {
     const [videoUser, setVideoUser] = useState("");
 
     useEffect(() => {

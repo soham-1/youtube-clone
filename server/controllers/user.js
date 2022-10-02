@@ -107,3 +107,13 @@ export const dislike = async (req, res, next) => {
         next(err);
     }
 };
+
+export const getSubscribed = async (req, res, next) => {
+    try {
+        const id = req.user.id;
+        const user = await User.findById(id);
+        res.status(200).json(user.subscribedUsers);
+    } catch (err) {
+        next(err);
+    }
+};

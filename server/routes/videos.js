@@ -10,6 +10,7 @@ import {
     getByTag,
     random,
     addView,
+    getVideoFromUser,
 } from '../controllers/video.js';
 import { verifyToken } from '../utils/verifyToken.js';
 
@@ -21,6 +22,9 @@ router.get("/search", search);
 router.get("/get-by-tag", getByTag);
 router.get("/random", random);
 router.put("/add-view", addView);
+
+// get video from userId, query params to set max videos to retrieve from user
+router.get('/get-from-user/:id/:max', getVideoFromUser);
 
 router.get("/:id", getVideo);
 router.post("/", verifyToken, createVideo);
