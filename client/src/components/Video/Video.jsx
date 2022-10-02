@@ -6,12 +6,16 @@ import { useParams } from 'react-router';
 
 import axiosInstance from '../../utils/axiosInstance';
 import './Video.css';
+import { useSelector } from 'react-redux';
 
 const Video = () => {
     const [video, setVideo] = useState(undefined);
     const [videoUser, setVideoUser] = useState("");
+    const [reload, setReload] = useState(false);
+    const [subscriberList, setSubscriberList] = useState([]);
     const [LikeClass, setLikeClass] = useState("me-3 bi bi-hand-thumbs-up");
     const [dislikeClass, setDislikeClass] = useState("me-3 bi bi-hand-thumbs-down");
+    const userid = useSelector(state => state.user.userInfo.userid);
     const { id } = useParams();
 
     const like = () => {
@@ -41,11 +45,24 @@ const Video = () => {
             .put(`users/subscribe/${videoUser._id}`)
             .then((res) => {
                 alert('subscribed successfully');
+                setReload(!reload);
             })
             .catch(err => {
                 console.log(err.response);
             })
-    }
+    };
+
+    const unsubscribe = () => {
+        axiosInstance
+            .put(`users/unsubscribe/${videoUser._id}`)
+            .then((res) => {
+                alert('Unsubscribed successfully');
+                setReload(!reload);
+            })
+            .catch(err => {
+                console.log(err.response);
+            })
+    };
 
     const getVideo = async () => {
         await axiosInstance
@@ -69,7 +86,12 @@ const Video = () => {
 
     useEffect(() => {
         getVideo();
-    }, []);
+        axiosInstance
+            .get('users/get-subscribed')
+            .then((res) => {
+                setSubscriberList(res.data);
+            })
+    }, [reload]);
 
     if (video === undefined)
         return (
@@ -103,7 +125,13 @@ const Video = () => {
                 <div className="card-text mb-3">description: {video.desc}</div>
                 <div className='d-flex align-items-center mb-3'>
                     <div className="card-text fw-bold fs-4 me-5">{videoUser.username}</div>
-                    <button type="button" className="btn btn-danger col-lg-2" onClick={subscribe}>subscribe</button>
+                    {
+                        subscriberList.includes(video.userId) ?
+                            <button type="button" className="btn btn-danger col-lg-2" onClick={unsubscribe}>Unsubscribe</button>
+                            :
+                            <button type="button" className="btn btn-danger col-lg-2" onClick={subscribe}>Subscribe</button>
+                    }
+
                 </div>
                 <small>{video.views} views . {format(video.createdAt)}</small>
             </div>
